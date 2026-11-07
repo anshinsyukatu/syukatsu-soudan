@@ -445,9 +445,43 @@
           まず話を聞く相手として、<strong>hiro</strong>がいます。
           専門家ではありません。自分も病気を経験し、自分の終活を自分で進めてきた一人の人間として、
           同じ目線でお話を聞きます。
-          むずかしく考えなくて大丈夫です。肩の力を抜いて、気軽にメールをください。
+          むずかしく考えなくて大丈夫です。肩の力を抜いて、まずは下の自動チャットで試しに話してみてください。それでも本人と話したいと思ったら、気軽にメールをください。
         </p>
       </header>
+
+      <section aria-labelledby="autochat">
+        <h2 id="autochat">まず、自動チャットで試しに話してみてください</h2>
+        <p>
+          hiroがnoteに書いてきた文章の中から、あなたの言葉に合う一節をそのままお返しする仕組みです。
+          本人ではありませんし、AIが文章を作っているわけでもありません。
+          登録不要・無料で、入力した内容がどこかに送られることもありません（あなたのブラウザの中で検索しています）。
+          ここで気持ちが少し軽くなれば、それで十分です。
+        </p>
+        <style>
+          .hc-chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+          .hc-chip{border:1px solid #e5d9c3;background:#fff;border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer;color:inherit}
+          .hc-chip:hover{background:#fdf6ea}
+          .hc-log{display:flex;flex-direction:column;gap:12px;margin:14px 0}
+          .hc-q{align-self:flex-end;background:#f0dcbc;border-radius:16px 16px 4px 16px;padding:9px 13px;max-width:85%;font-size:14.5px;white-space:pre-wrap}
+          .hc-a{align-self:flex-start;max-width:94%;font-size:14.5px}
+          .hc-intro{color:#8a8071;font-size:12.5px;margin:0 0 6px}
+          .hc-quote{background:#fff;border:1px solid #eee4d2;border-left:4px solid #b06a28;border-radius:10px;padding:11px 13px;margin:0 0 8px;white-space:pre-wrap}
+          .hc-src{display:block;margin-top:7px;font-size:11.5px;color:#8a8071}
+          .hc-src a{color:#b06a28}
+          .hc-form{display:flex;gap:8px;margin-top:6px}
+          .hc-form input{flex:1;border:1px solid #e5d9c3;border-radius:12px;padding:11px;font-size:16px;min-width:0}
+          .hc-form button{border:none;background:#b06a28;color:#fff;border-radius:12px;padding:0 18px;font-size:14.5px;cursor:pointer}
+        </style>
+        <div class="hc-chips" id="hc-chips"></div>
+        <div class="hc-log" id="hc-log"></div>
+        <form class="hc-form" id="hc-form">
+          <input id="hc-input" type="text" placeholder="聞きたいことを書いてください" autocomplete="off">
+          <button type="submit">聞く</button>
+        </form>
+        <p style="color:#8a8071;font-size:12.5px;margin-top:14px">
+          それでも本人と話したいと思ったら、下の「相談の流れ」からメールをください。Zoomでお話を聞きます。
+        </p>
+      </section>
 
       <section aria-labelledby="about">
         <h2 id="about">相談相手について</h2>
@@ -553,7 +587,11 @@
         <h2 id="flow">相談の流れ</h2>
         <ol class="flow">
           <li>
-            <span class="step-title">メールでご連絡ください</span>
+            <span class="step-title">自動チャットで試しに話してみる</span>
+            <span class="step-body">このページの上の自動チャットで、hiroの文章からの返事を試してみてください。そこで気持ちが少し軽くなれば、それで十分です。</span>
+          </li>
+          <li>
+            <span class="step-title">それでも本人と話したい方は、メールでご連絡ください</span>
             <span class="step-body">窓口はメールのみです。困っていること、聞きたいことを、短くても構いませんので書いて送ってください。下のボタンを使うと、書いてほしい項目入りのメール作成画面が開きます。</span>
             <span class="step-actions"><a class="btn btn-accent" href="mailto:anshin.syukatu@gmail.com?subject=%E7%B5%82%E6%B4%BB%E7%9B%B8%E8%AB%87%E3%81%AE%E4%BB%B6&body=%E3%81%8A%E5%90%8D%E5%89%8D%EF%BC%88%E3%83%8B%E3%83%83%E3%82%AF%E3%83%8D%E3%83%BC%E3%83%A0%E3%81%A7%E3%82%82%E6%A7%8B%E3%81%84%E3%81%BE%E3%81%9B%E3%82%93%EF%BC%89%EF%BC%9A%0A%E3%81%8A%E4%BD%8F%E3%81%BE%E3%81%84%E3%81%AE%E5%9C%B0%E5%9F%9F%EF%BC%88%E5%B8%82%E5%8C%BA%E7%94%BA%E6%9D%91%E3%81%BE%E3%81%A7%E3%81%A7%E5%A4%A7%E4%B8%88%E5%A4%AB%E3%81%A7%E3%81%99%EF%BC%89%EF%BC%9A%0A%E7%9B%B8%E8%AB%87%E3%81%97%E3%81%9F%E3%81%84%E3%81%93%E3%81%A8%EF%BC%9A%0A%E5%B8%8C%E6%9C%9B%E3%81%AE%E6%96%B9%E6%B3%95%EF%BC%88Zoom%EF%BC%8F%E3%81%BE%E3%81%9A%E3%81%AF%E3%83%A1%E3%83%BC%E3%83%AB%E3%81%A0%E3%81%91%EF%BC%89%EF%BC%9A%0A%E5%B8%8C%E6%9C%9B%E3%81%AE%E6%97%A5%E6%99%82%EF%BC%88%E5%9C%9F%E6%97%A5%E3%81%8C%E5%9F%BA%E6%9C%AC%E3%81%A7%E3%81%99%EF%BC%89%EF%BC%9A%0A">雛形入りでメールを書く</a></span>
           </li>
@@ -753,5 +791,113 @@
         });
       })();
     </script>
-  </body>
+  
+<script>
+(function(){
+  var STARTERS = ['終活って何から始めましたか？','家族にはどう伝えましたか？','手術は怖かったですか？','治療費はどれくらいかかりましたか？','再発が怖いです','今の気持ちは？'];
+  var DOCS = [], IDF = {};
+  var FUNC = ['について','でしょうか','ましたか','ですか','ますか','ください','ほしい','どう','どれくらい','どのくらい','いつ','何を','して','いる','ある','なる','こと','もの','ため','よう','は','が','を','に','の','へ','と','や','も','か','ね','よ','で','す','し','た','て'];
+  function cleanQuery(q){
+    var t = (q||'').replace(/[\s。、・「」『』（）()!?！？:：;；,.\"'〜~]/g,'');
+    for(var i=0;i<FUNC.length;i++) t = t.split(FUNC[i]).join('');
+    return t;
+  }
+  function bigrams(x){
+    var t = (x||'').replace(/[\s。、・「」『』（）()!?！？:：;；,.\"'〜~\-ー]/g,'').toLowerCase();
+    var out = [];
+    for(var i=0;i<t.length-1;i++) out.push(t.slice(i,i+2));
+    return out;
+  }
+  function esc(x){ return x.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function addQ(q){
+    var log = document.getElementById('hc-log');
+    var div = document.createElement('div');
+    div.className = 'hc-q'; div.textContent = q;
+    log.appendChild(div);
+  }
+  function addA(hits, intro){
+    var log = document.getElementById('hc-log');
+    var div = document.createElement('div');
+    div.className = 'hc-a';
+    if(!hits.length){
+      div.innerHTML = '<p class="hc-intro">すみません</p><div class="hc-quote">そのことは、まだ文章に書いていないみたいです。別の言い方で聞いてもらうか、<a href="https://note.com/hiro_s1220" target="_blank" rel="noopener">note</a>をのぞいてみてください。本人に聞きたい場合は、下の「相談の流れ」からメールをどうぞ。</div>';
+    } else {
+      var html = '<p class="hc-intro">' + esc(intro || 'そのことについては、こんなふうに書いています。') + '</p>';
+      for(var i=0;i<hits.length;i++){
+        html += '<div class="hc-quote">' + esc(hits[i].text) + '<span class="hc-src">出典：<a href="' + hits[i].url + '" target="_blank" rel="noopener">' + esc(hits[i].title) + '</a></span></div>';
+      }
+      div.innerHTML = html;
+    }
+    log.appendChild(div);
+  }
+  function score(qb, d){
+    var sc = 0;
+    for(var i=0;i<qb.length;i++){
+      var b = qb[i], w = IDF[b];
+      if(!w) continue;
+      var c = 0, idx = d.text.indexOf(b);
+      while(idx !== -1){ c++; idx = d.text.indexOf(b, idx+1); if(c>=2) break; }
+      sc += w * c;
+      if(d.title.indexOf(b) !== -1) sc += w * 1.5;
+    }
+    return sc / (0.6 + Math.sqrt(d.text.length/120));
+  }
+  function search(q){
+    var seen = {}, qb = [];
+    var raw = bigrams(cleanQuery(q));
+    for(var i=0;i<raw.length;i++){ if(!seen[raw[i]]){ seen[raw[i]]=1; qb.push(raw[i]); } }
+    if(!qb.length) return [];
+    var scored = [];
+    for(var j=0;j<DOCS.length;j++){ var sc = score(qb, DOCS[j]); if(sc>0) scored.push({d:DOCS[j], s:sc}); }
+    scored.sort(function(a,b){ return b.s - a.s; });
+    if(!scored.length || scored[0].s < 1.2) return [];
+    var top = scored[0].s, picked = [], used = {};
+    for(var k=0;k<scored.length;k++){
+      if(picked.length>=2) break;
+      if(scored[k].s < top*0.5) break;
+      if(used[scored[k].d.title] && picked.length) continue;
+      used[scored[k].d.title] = 1;
+      picked.push(scored[k].d);
+    }
+    return picked;
+  }
+  function ask(q){
+    q = (q||'').trim();
+    if(!q) return;
+    addQ(q);
+    addA(search(q));
+    document.getElementById('hc-input').value = '';
+  }
+  var chips = document.getElementById('hc-chips');
+  STARTERS.forEach(function(q){
+    var el = document.createElement('button');
+    el.className = 'hc-chip'; el.type = 'button'; el.textContent = q;
+    el.onclick = function(){ ask(q); };
+    chips.appendChild(el);
+  });
+  document.getElementById('hc-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    ask(document.getElementById('hc-input').value);
+  });
+  fetch('https://anshinsyukatu.github.io/works/corpus.json')
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      var df = {};
+      data.articles.forEach(function(a){
+        a.passages.forEach(function(p){ DOCS.push({title:a.title, url:a.url, text:p}); });
+      });
+      DOCS.forEach(function(d){
+        var seen = {}, bg = bigrams(d.title + d.text);
+        bg.forEach(function(b){ if(!seen[b]){ seen[b]=1; df[b]=(df[b]||0)+1; } });
+      });
+      var N = DOCS.length;
+      for(var b in df) IDF[b] = Math.log(1 + N/(1+df[b]));
+      addA([{text:'こんにちは。ここでは、hiroが書いてきた文章の中から、あなたの言葉に合う一節をお返しします。上のボタンから選ぶか、下の欄に自由に書いてみてください。', title:'ごあいさつ', url:'https://note.com/hiro_s1220'}], '最初に');
+    })
+    .catch(function(){
+      addA([], '');
+    });
+})();
+</script>
+</body>
 </html>
