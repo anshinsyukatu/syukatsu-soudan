@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:," />
+    <title>終活の相談について — hiro（下書き）</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #f7f5f0;
+        --surface: #ffffff;
+        --surface-soft: #eef2ec;
+        --ink: #23281f;
+        --ink-soft: #454b3f;
+        --ink-faint: #5c6355;
+        --line: #d8dcd0;
+        --accent: #3d5c48;
+        --accent-ink: #ffffff;
+        --accent-soft: #e3ebe1;
+        --warn-bg: #fbf6ea;
+        --warn-line: #e2d3ac;
+        --warn-ink: #4d4225;
+        --draft-bg: #efe9dc;
+        --draft-ink: #5a4d2e;
+        --radius: 14px;
+        --shadow: 0 1px 3px rgba(35, 40, 31, 0.08);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #171a15;
+          --surface: #21251e;
+          --surface-soft: #252b22;
+          --ink: #eef0e8;
+          --ink-soft: #c9cec0;
+          --ink-faint: #a6ad9c;
+          --line: #3a4034;
+          --accent: #8fb79b;
+          --accent-ink: #14201a;
+          --accent-soft: #2b382c;
+          --warn-bg: #2c2718;
+          --warn-line: #57492a;
+          --warn-ink: #e8dcc0;
+          --draft-bg: #2c2718;
+          --draft-ink: #e0d2a8;
+          --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+        }
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Hiragino Sans",
+          "Yu Gothic", sans-serif;
+        font-size: 18px;
+        line-height: 1.9;
+        -webkit-font-smoothing: antialiased;
+      }
+      .wrap {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 0 20px 72px;
+      }
+
+      /* ---------- Draft notice ---------- */
+      .draft-bar {
+        margin: 20px 0 0;
+        background: var(--draft-bg);
+        color: var(--draft-ink);
+        border: 1px solid var(--warn-line);
+        border-radius: 10px;
+        padding: 12px 18px;
+        font-size: 15.5px;
+        line-height: 1.7;
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+      }
+      .draft-bar strong { font-weight: 700; white-space: nowrap; }
+
+      /* ---------- Header ---------- */
+      header { padding: 44px 0 8px; }
+      .kicker {
+        font-size: 15px;
+        letter-spacing: 0.14em;
+        color: var(--accent);
+        font-weight: 700;
+        margin: 0 0 14px;
+      }
+      h1 {
+        font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+        font-size: clamp(30px, 6.4vw, 42px);
+        line-height: 1.45;
+        font-weight: 700;
+        margin: 0 0 20px;
+      }
+      .lead {
+        font-size: 19px;
+        color: var(--ink-soft);
+        margin: 0;
+      }
+      .lead strong { color: var(--ink); }
+
+      /* ---------- Sections ---------- */
+      section { margin-top: 56px; }
+      h2 {
+        font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+        font-size: 25px;
+        line-height: 1.5;
+        font-weight: 700;
+        margin: 0 0 8px;
+        padding-bottom: 12px;
+        border-bottom: 2px solid var(--accent);
+      }
+      .section-intro { color: var(--ink-soft); margin: 14px 0 0; }
+      p { margin: 0 0 1em; }
+      p:last-child { margin-bottom: 0; }
+
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 26px 28px;
+        margin-top: 22px;
+      }
+      .card h3 {
+        font-size: 19px;
+        font-weight: 700;
+        margin: 0 0 12px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .card h3 .tag {
+        font-size: 13.5px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        padding: 3px 12px;
+        border-radius: 999px;
+        line-height: 1.5;
+      }
+      .tag-no { background: var(--warn-bg); color: var(--warn-ink); border: 1px solid var(--warn-line); }
+      .tag-link { background: var(--surface-soft); color: var(--ink-soft); border: 1px solid var(--line); }
+      .tag-yes { background: var(--accent-soft); color: var(--accent); border: 1px solid var(--line); }
+      @media (prefers-color-scheme: dark) {
+        .tag-yes { color: var(--accent); }
+      }
+
+      ul.plain {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      ul.plain li {
+        padding: 10px 0 10px 30px;
+        position: relative;
+        border-bottom: 1px dashed var(--line);
+      }
+      ul.plain li:last-child { border-bottom: none; padding-bottom: 2px; }
+      ul.plain li:first-child { padding-top: 2px; }
+      ul.plain li::before {
+        position: absolute;
+        left: 2px;
+        top: 10px;
+        font-size: 16px;
+        line-height: 1.9;
+      }
+      ul.no li::before { content: "×"; color: #a4552f; font-weight: 700; }
+      ul.yes li::before { content: "○"; color: var(--accent); font-weight: 700; }
+      @media (prefers-color-scheme: dark) {
+        ul.no li::before { color: #d99a70; }
+      }
+      ul.plain li .note {
+        display: block;
+        font-size: 15.5px;
+        color: var(--ink-faint);
+        line-height: 1.75;
+      }
+
+      .route-list { margin: 0; padding: 0; list-style: none; }
+      .route-list li {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px 14px;
+        padding: 11px 0;
+        border-bottom: 1px dashed var(--line);
+        align-items: baseline;
+      }
+      .route-list li:last-child { border-bottom: none; padding-bottom: 2px; }
+      .route-list li:first-child { padding-top: 2px; }
+      .route-topic { font-weight: 700; min-width: 9.5em; }
+      .route-arrow { color: var(--ink-faint); }
+      .route-to { color: var(--ink-soft); }
+
+      /* ---------- Flow ---------- */
+      ol.flow {
+        list-style: none;
+        margin: 22px 0 0;
+        padding: 0;
+        counter-reset: step;
+      }
+      ol.flow li {
+        counter-increment: step;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 20px 24px 20px 76px;
+        position: relative;
+        margin-bottom: 14px;
+      }
+      ol.flow li::before {
+        content: counter(step);
+        position: absolute;
+        left: 22px;
+        top: 20px;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: var(--accent);
+        color: var(--accent-ink);
+        font-weight: 700;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1;
+      }
+      ol.flow .step-title { font-weight: 700; font-size: 18.5px; display: block; }
+      ol.flow .step-body { color: var(--ink-soft); font-size: 16.5px; line-height: 1.8; display: block; margin-top: 2px; }
+
+      /* ---------- Free / paid ---------- */
+      .free-box {
+        background: var(--surface-soft);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 24px 28px;
+        margin-top: 22px;
+      }
+      .free-box h3 { margin: 0 0 8px; font-size: 20px; }
+      .paid-box {
+        margin-top: 16px;
+        padding: 4px 4px 0;
+        color: var(--ink-soft);
+        font-size: 16.5px;
+        line-height: 1.85;
+      }
+      .paid-box strong { color: var(--ink); }
+
+      /* ---------- Contact ---------- */
+      .contact-card {
+        background: var(--accent);
+        color: var(--accent-ink);
+        border-radius: var(--radius);
+        padding: 30px 28px;
+        margin-top: 22px;
+      }
+      .contact-card h3 { color: inherit; margin: 0 0 6px; font-size: 20px; }
+      .contact-card p { color: inherit; opacity: 0.92; font-size: 16.5px; }
+      .mail-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        align-items: center;
+        margin-top: 18px;
+      }
+      .mail-address {
+        font-size: clamp(19px, 5vw, 24px);
+        font-weight: 700;
+        letter-spacing: 0.01em;
+        word-break: break-all;
+        line-height: 1.5;
+      }
+      .btn {
+        appearance: none;
+        border: none;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: 16.5px;
+        font-weight: 700;
+        border-radius: 10px;
+        padding: 13px 24px;
+        line-height: 1.5;
+        text-decoration: none;
+        display: inline-block;
+      }
+      .btn-light { background: var(--accent-ink); color: var(--accent); }
+      @media (prefers-color-scheme: dark) {
+        .btn-light { color: #14201a; }
+      }
+      .btn-outline {
+        background: transparent;
+        color: var(--accent-ink);
+        border: 2px solid currentColor;
+      }
+      .btn:focus-visible, a:focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      .contact-card .btn:focus-visible { outline-color: var(--accent-ink); }
+      .copy-status {
+        font-size: 15px;
+        min-height: 1.6em;
+        margin-top: 10px;
+        opacity: 0.95;
+      }
+
+      /* ---------- Links ---------- */
+      .link-list { display: grid; gap: 14px; margin-top: 22px; }
+      .link-item {
+        display: block;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 20px 24px;
+        text-decoration: none;
+        color: var(--ink);
+      }
+      .link-item:hover { border-color: var(--accent); }
+      .link-item .link-name { font-weight: 700; font-size: 18.5px; display: block; }
+      .link-item .link-desc { color: var(--ink-faint); font-size: 15.5px; display: block; margin-top: 2px; line-height: 1.75; }
+      .link-item .link-arrow { color: var(--accent); font-weight: 700; }
+
+      .notice-box {
+        background: var(--warn-bg);
+        border: 1px solid var(--warn-line);
+        border-radius: var(--radius);
+        color: var(--warn-ink);
+        padding: 22px 26px;
+        margin-top: 22px;
+        font-size: 16.5px;
+        line-height: 1.85;
+      }
+      .notice-box h3 { margin: 0 0 8px; font-size: 18px; color: inherit; }
+      .notice-box ul { margin: 0; padding-left: 1.3em; }
+      .notice-box li { margin-bottom: 4px; }
+      .notice-box li:last-child { margin-bottom: 0; }
+
+      footer {
+        margin-top: 64px;
+        padding-top: 24px;
+        border-top: 1px solid var(--line);
+        color: var(--ink-faint);
+        font-size: 15px;
+        line-height: 1.8;
+      }
+
+      @media (max-width: 560px) {
+        body { font-size: 17.5px; }
+        .card, .free-box { padding: 22px 20px; }
+        .contact-card { padding: 26px 20px; }
+        ol.flow li { padding: 18px 18px 18px 66px; }
+        ol.flow li::before { left: 16px; top: 18px; }
+        .route-topic { min-width: 100%; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="draft-bar" role="note">
+        <strong>下書き</strong>
+        <span>このページは公開前の下書きです。内容は今後、少しずつ直していきます。</span>
+      </div>
+
+      <header>
+        <p class="kicker">対面（西三河周辺）・オンライン（Zoom）の終活相談</p>
+        <h1>終活の相談について</h1>
+        <p class="lead">
+          「何から手をつけたらいいか分からない」「家族に話しにくい」——終活のことで迷ったとき、
+          まず話を聞く相手として、<strong>hiro</strong>がいます。
+          専門家ではありません。自分も病気を経験し、自分の終活を自分で進めてきた一人の人間として、
+          同じ目線でお話を聞きます。
+        </p>
+      </header>
+
+      <section aria-labelledby="about">
+        <h2 id="about">相談相手について</h2>
+        <div class="card">
+          <p>
+            hiro。胃がんステージ1のサバイバーで、胃の亜全摘の手術を受けました。
+            治療の記録とその後の暮らしを、noteの「胃がん日記」に書き続け、その歩みはKindleの本にもなっています。
+          </p>
+          <p>
+            病気をきっかけに、自分の終活も自分で進めてきました。
+            エンディングノートを書くときの迷いや、家族への伝えにくさは、ひと通り自分で通ってきた道です。
+            その体験から、「まず話を聞いてほしい」という方の相談相手をしています。
+          </p>
+          <p>
+            大きく構えるつもりはありません。お金が目的ではなく、
+            まずは無料で届けて、信用を少しずつ積み重ねていく——それが基本の姿勢です。
+          </p>
+        </div>
+      </section>
+
+      <section aria-labelledby="lines">
+        <h2 id="lines">できること・できないこと</h2>
+        <p class="section-intro">
+          最初に、できないことを正直に書いておきます。
+          ここをはっきりさせておくことが、安心して相談してもらうための約束だと思っています。
+        </p>
+
+        <div class="card">
+          <h3><span class="tag tag-no">やらないこと</span></h3>
+          <ul class="plain no">
+            <li>遺言書の代筆・文案づくり
+              <span class="note">自筆の遺言は、全文を本人が手書きしないと効力を持ちません。善意の代筆が、大事な書類を壊してしまうことがあります。</span>
+            </li>
+            <li>その人ごとの相続税の計算</li>
+            <li>遺産の分け方の案を出すこと</li>
+            <li>保険・金融商品の個別のおすすめや販売</li>
+            <li>各種手続きの代行</li>
+            <li>紹介料をもらっての紹介
+              <span class="note">専門家を紹介するとき、紹介料は一切いただきません。</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3><span class="tag tag-link">専門家につなぐこと</span></h3>
+          <p style="color: var(--ink-soft); font-size: 16.5px; margin-bottom: 10px;">
+            法律・税金・登記などの専門的なことは、私の判断では扱わず、担当の専門家や公的窓口へ橋渡しします。
+          </p>
+          <ul class="route-list">
+            <li><span class="route-topic">遺言のこと</span><span class="route-arrow">→</span><span class="route-to">行政書士・弁護士</span></li>
+            <li><span class="route-topic">相続税のこと</span><span class="route-arrow">→</span><span class="route-to">税理士</span></li>
+            <li><span class="route-topic">相続のもめごと</span><span class="route-arrow">→</span><span class="route-to">弁護士</span></li>
+            <li><span class="route-topic">不動産の名義変更</span><span class="route-arrow">→</span><span class="route-to">司法書士</span></li>
+            <li><span class="route-topic">介護・年金のこと</span><span class="route-arrow">→</span><span class="route-to">地域包括支援センター</span></li>
+          </ul>
+          <p style="color: var(--ink-soft); font-size: 16.5px; margin-top: 12px;">
+            まずはお住まいの自治体の無料相談窓口（弁護士・司法書士・行政書士・税理士）へのご案内もできます。
+            公的な窓口なので、費用の心配なく使えます。
+          </p>
+        </div>
+
+        <div class="card">
+          <h3><span class="tag tag-yes">私ができること</span></h3>
+          <ul class="plain yes">
+            <li>話を聞くこと、困りごとを整理すること</li>
+            <li>制度についての一般的な説明</li>
+            <li>エンディングノートづくりのお手伝い
+              <span class="note">エンディングノートには法的な効力はありません。大事な部分は遺言に残すよう、あわせてお伝えします。</span>
+            </li>
+            <li>自分の体験（治療、回復、自分の終活）を話すこと</li>
+            <li>専門家・公的窓口への橋渡し</li>
+          </ul>
+        </div>
+      </section>
+
+      <section aria-labelledby="flow">
+        <h2 id="flow">相談の流れ</h2>
+        <ol class="flow">
+          <li>
+            <span class="step-title">メールでご連絡ください</span>
+            <span class="step-body">窓口はメールのみです。困っていること、聞きたいことを、短くても構いませんので書いて送ってください。</span>
+          </li>
+          <li>
+            <span class="step-title">返信で日程と方法を調整します</span>
+            <span class="step-body">内容を確認して返信し、お会いする日時と、対面かZoomかをご相談して決めます。希望があれば、最初のメールに書いてください。</span>
+          </li>
+          <li>
+            <span class="step-title">対面またはZoomでお話を聞きます</span>
+            <span class="step-body">対面は愛知県・西三河周辺のみで、遠方へ伺うことはできません。Zoomでのオンライン相談は地域を問いませんので、遠方の方もご利用いただけます。</span>
+          </li>
+          <li>
+            <span class="step-title">必要に応じて橋渡しします</span>
+            <span class="step-body">専門的なことが必要な場合は、専門家や公的窓口へつなぎます。</span>
+          </li>
+        </ol>
+      </section>
+
+      <section aria-labelledby="price">
+        <h2 id="price">無料の範囲と、有料について</h2>
+        <div class="free-box">
+          <h3>メールでの最初の相談は、無料です</h3>
+          <p>
+            メールでの最初のご相談と、話を聞くところまでは無料です。
+            「こんなこと聞いていいのかな」という段階のものでも構いません。まずはメールをください。
+          </p>
+        </div>
+        <div class="paid-box">
+          <p>
+            対面またはZoomで腰を据えて整理する本相談は、有料です。
+            金額はまだ決めていないため、この下書きでは載せていません。
+            お金は目的ではなく、最終地点として一番最後に置いているものです。
+          </p>
+        </div>
+      </section>
+
+      <section aria-labelledby="privacy">
+        <h2 id="privacy">個人情報と、大事にしていること</h2>
+        <div class="card">
+          <ul class="plain yes">
+            <li>自宅の住所や個人の電話番号は載せていません。連絡はメールのみです。</li>
+            <li>相談でうかがった内容を、外に出すことはありません。</li>
+            <li>写真の加工はしません。ありのままの姿でお会いします。</li>
+          </ul>
+        </div>
+        <div class="notice-box">
+          <h3>ご承知おきください</h3>
+          <ul>
+            <li>医療・法律・税務についての専門的な判断はしません。必要な場合は、専門家につなぎます。</li>
+            <li>この窓口は、緊急の相談窓口ではありません。お急ぎの困りごとは、まず公的な相談窓口をご利用ください。</li>
+          </ul>
+        </div>
+      </section>
+
+      <section aria-labelledby="contact">
+        <h2 id="contact">連絡先</h2>
+        <div class="contact-card">
+          <h3>終活相談の窓口（メール）</h3>
+          <p>メールでの最初の相談は無料です。返信には少しお時間をいただく場合があります。</p>
+          <div class="mail-row">
+            <span class="mail-address">anshin.syukatu@gmail.com</span>
+          </div>
+          <div class="mail-row">
+            <a class="btn btn-light" href="mailto:anshin.syukatu@gmail.com?subject=%E7%B5%82%E6%B4%BB%E3%81%AE%E7%9B%B8%E8%AB%87%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">メールを書く</a>
+            <button class="btn btn-outline" type="button" id="copyBtn">アドレスをコピー</button>
+          </div>
+          <p class="copy-status" id="copyStatus" aria-live="polite"></p>
+        </div>
+      </section>
+
+      <section aria-labelledby="links">
+        <h2 id="links">hiroの発信</h2>
+        <div class="link-list">
+          <a class="link-item" href="https://note.com/hiro_s1220" target="_blank" rel="noopener">
+            <span class="link-name">note「胃がん日記」 <span class="link-arrow">→</span></span>
+            <span class="link-desc">治療の記録と、その後の暮らしを書いているマガジンです。</span>
+          </a>
+          <a class="link-item" href="https://www.youtube.com/@anshin.syukatu_hiro" target="_blank" rel="noopener">
+            <span class="link-name">YouTube「hiroの安心終活」 <span class="link-arrow">→</span></span>
+            <span class="link-desc">「胃がん日記」を朗読動画で届けているチャンネルです。</span>
+          </a>
+          <a class="link-item" href="https://anshinsyukatu.github.io/survivor-diary/" target="_blank" rel="noopener">
+            <span class="link-name">本の紹介ページ <span class="link-arrow">→</span></span>
+            <span class="link-desc">Kindle本『胃がん日記』の紹介ページです。これまでの歩みも載っています。</span>
+          </a>
+        </div>
+      </section>
+
+      <footer>
+        <p>終活の相談窓口：hiro（対面は愛知県・西三河周辺／Zoomは地域を問いません・連絡はメールのみ）</p>
+        <p>このページは下書きです。内容は予告なく直すことがあります。</p>
+      </footer>
+    </div>
+
+    <script>
+      (function () {
+        var btn = document.getElementById("copyBtn");
+        var status = document.getElementById("copyStatus");
+        var email = "anshin.syukatu@gmail.com";
+        btn.addEventListener("click", function () {
+          function done(ok) {
+            status.textContent = ok
+              ? "メールアドレスをコピーしました。"
+              : "コピーできませんでした。アドレスを長押ししてコピーしてください。";
+          }
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(email).then(
+              function () { done(true); },
+              function () { fallback(); }
+            );
+          } else {
+            fallback();
+          }
+          function fallback() {
+            var ta = document.createElement("textarea");
+            ta.value = email;
+            ta.style.position = "fixed";
+            ta.style.opacity = "0";
+            document.body.appendChild(ta);
+            ta.select();
+            try {
+              done(document.execCommand("copy"));
+            } catch (e) {
+              done(false);
+            }
+            document.body.removeChild(ta);
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>
