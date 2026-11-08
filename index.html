@@ -1,0 +1,897 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:," />
+    <title>終活の相談について — hiro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #faf3e7;
+        --surface: #fffdf7;
+        --surface-soft: #f5ecda;
+        --ink: #2f2721;
+        --ink-soft: #584a3d;
+        --ink-faint: #7e6c5b;
+        --line: #e3d4bd;
+        --accent: #8c5a1e;
+        --accent-ink: #ffffff;
+        --accent-soft: #f6e8d0;
+        --warn-bg: #fdf6e3;
+        --warn-line: #e6d3a3;
+        --warn-ink: #57451f;
+        --draft-bg: #f3e8d2;
+        --draft-ink: #66512a;
+        --radius: 14px;
+        --shadow: 0 1px 3px rgba(66, 48, 24, 0.1);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #1e1812;
+          --surface: #2a211a;
+          --surface-soft: #2f251b;
+          --ink: #f3ebdb;
+          --ink-soft: #dacbb5;
+          --ink-faint: #b6a58e;
+          --line: #4c3e2d;
+          --accent: #e5ad6c;
+          --accent-ink: #2b1d0c;
+          --accent-soft: #40311c;
+          --warn-bg: #332818;
+          --warn-line: #63502c;
+          --warn-ink: #f0dcb0;
+          --draft-bg: #332818;
+          --draft-ink: #ecd9ab;
+          --shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
+        }
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Hiragino Sans",
+          "Yu Gothic", sans-serif;
+        font-size: 18px;
+        line-height: 1.9;
+        -webkit-font-smoothing: antialiased;
+      }
+      .wrap {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 0 20px 72px;
+      }
+
+      /* ---------- Draft notice ---------- */
+      .draft-bar {
+        margin: 20px 0 0;
+        background: var(--draft-bg);
+        color: var(--draft-ink);
+        border: 1px solid var(--warn-line);
+        border-radius: 10px;
+        padding: 12px 18px;
+        font-size: 15.5px;
+        line-height: 1.7;
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+      }
+      .draft-bar strong { font-weight: 700; white-space: nowrap; }
+
+      /* ---------- Header ---------- */
+      header { padding: 44px 0 8px; }
+      .kicker {
+        font-size: 15px;
+        letter-spacing: 0.14em;
+        color: var(--accent);
+        font-weight: 700;
+        margin: 0 0 14px;
+      }
+      h1 {
+        font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+        font-size: clamp(30px, 6.4vw, 42px);
+        line-height: 1.45;
+        font-weight: 700;
+        margin: 0 0 20px;
+      }
+      .lead {
+        font-size: 19px;
+        color: var(--ink-soft);
+        margin: 0;
+      }
+      .lead strong { color: var(--ink); }
+
+      /* ---------- Sections ---------- */
+      section { margin-top: 56px; }
+      h2 {
+        font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+        font-size: 25px;
+        line-height: 1.5;
+        font-weight: 700;
+        margin: 0 0 8px;
+        padding-bottom: 12px;
+        border-bottom: 2px solid var(--accent);
+      }
+      .section-intro { color: var(--ink-soft); margin: 14px 0 0; }
+      p { margin: 0 0 1em; }
+      p:last-child { margin-bottom: 0; }
+
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 26px 28px;
+        margin-top: 22px;
+      }
+      .card h3 {
+        font-size: 19px;
+        font-weight: 700;
+        margin: 0 0 12px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .card h3 .tag {
+        font-size: 13.5px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        padding: 3px 12px;
+        border-radius: 999px;
+        line-height: 1.5;
+      }
+      .tag-no { background: var(--warn-bg); color: var(--warn-ink); border: 1px solid var(--warn-line); }
+      .tag-link { background: var(--surface-soft); color: var(--ink-soft); border: 1px solid var(--line); }
+      .tag-yes { background: var(--accent-soft); color: var(--accent); border: 1px solid var(--line); }
+      @media (prefers-color-scheme: dark) {
+        .tag-yes { color: var(--accent); }
+      }
+
+      ul.plain {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      ul.plain li {
+        padding: 10px 0 10px 30px;
+        position: relative;
+        border-bottom: 1px dashed var(--line);
+      }
+      ul.plain li:last-child { border-bottom: none; padding-bottom: 2px; }
+      ul.plain li:first-child { padding-top: 2px; }
+      ul.plain li::before {
+        position: absolute;
+        left: 2px;
+        top: 10px;
+        font-size: 16px;
+        line-height: 1.9;
+      }
+      ul.no li::before { content: "×"; color: #a4552f; font-weight: 700; }
+      ul.yes li::before { content: "○"; color: var(--accent); font-weight: 700; }
+      @media (prefers-color-scheme: dark) {
+        ul.no li::before { color: #d99a70; }
+      }
+      ul.plain li .note {
+        display: block;
+        font-size: 15.5px;
+        color: var(--ink-faint);
+        line-height: 1.75;
+      }
+
+      .route-list { margin: 0; padding: 0; list-style: none; }
+      .route-list li {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px 14px;
+        padding: 11px 0;
+        border-bottom: 1px dashed var(--line);
+        align-items: baseline;
+      }
+      .route-list li:last-child { border-bottom: none; padding-bottom: 2px; }
+      .route-list li:first-child { padding-top: 2px; }
+      .route-topic { font-weight: 700; min-width: 9.5em; }
+      .route-arrow { color: var(--ink-faint); }
+      .route-to { color: var(--ink-soft); }
+
+      .subhead {
+        font-size: 20px;
+        font-weight: 700;
+        margin: 36px 0 6px;
+      }
+
+      /* ---------- Profile ---------- */
+      .profile-head {
+        display: flex;
+        gap: 22px;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-bottom: 18px;
+      }
+      .profile-photo {
+        width: 132px;
+        height: 132px;
+        border-radius: 50%;
+        object-fit: cover;
+        flex: none;
+        border: 3px solid var(--accent-soft);
+        box-shadow: var(--shadow);
+        background: var(--surface-soft);
+      }
+      .profile-name { font-size: 23px; font-weight: 700; margin: 0; line-height: 1.5; }
+      .profile-sub { color: var(--ink-faint); font-size: 15.5px; margin: 2px 0 0; }
+
+      /* ---------- Mail template ---------- */
+      .step-actions { display: block; margin-top: 14px; }
+      .template-box {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 26px 28px;
+        margin-top: 22px;
+      }
+      .template-box h3 { margin: 0 0 8px; font-size: 20px; }
+      .template-box .template-lead { color: var(--ink-soft); font-size: 16.5px; }
+      .template-body {
+        background: var(--surface-soft);
+        border-radius: 10px;
+        padding: 18px 20px;
+        font-size: 16.5px;
+        line-height: 2;
+        white-space: pre-wrap;
+        margin: 0 0 18px;
+      }
+      .btn-accent { background: var(--accent); color: var(--accent-ink); }
+      .btn-ghost {
+        background: transparent;
+        color: var(--accent);
+        border: 2px solid var(--accent);
+      }
+      .copy-note {
+        font-size: 15px;
+        min-height: 1.6em;
+        margin-top: 10px;
+        color: var(--ink-faint);
+      }
+
+      /* ---------- Flow ---------- */
+      ol.flow {
+        list-style: none;
+        margin: 22px 0 0;
+        padding: 0;
+        counter-reset: step;
+      }
+      ol.flow li {
+        counter-increment: step;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 20px 24px 20px 76px;
+        position: relative;
+        margin-bottom: 14px;
+      }
+      ol.flow li::before {
+        content: counter(step);
+        position: absolute;
+        left: 22px;
+        top: 20px;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: var(--accent);
+        color: var(--accent-ink);
+        font-weight: 700;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1;
+      }
+      ol.flow .step-title { font-weight: 700; font-size: 18.5px; display: block; }
+      ol.flow .step-body { color: var(--ink-soft); font-size: 16.5px; line-height: 1.8; display: block; margin-top: 2px; }
+
+      /* ---------- Free / paid ---------- */
+      .free-box {
+        background: var(--surface-soft);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 24px 28px;
+        margin-top: 22px;
+      }
+      .free-box h3 { margin: 0 0 8px; font-size: 20px; }
+      .paid-box {
+        margin-top: 16px;
+        padding: 4px 4px 0;
+        color: var(--ink-soft);
+        font-size: 16.5px;
+        line-height: 1.85;
+      }
+      .paid-box strong { color: var(--ink); }
+
+      /* ---------- Contact ---------- */
+      .contact-card {
+        background: var(--accent);
+        color: var(--accent-ink);
+        border-radius: var(--radius);
+        padding: 30px 28px;
+        margin-top: 22px;
+      }
+      .contact-card h3 { color: inherit; margin: 0 0 6px; font-size: 20px; }
+      .contact-card p { color: inherit; opacity: 0.92; font-size: 16.5px; }
+      .mail-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        align-items: center;
+        margin-top: 18px;
+      }
+      .mail-address {
+        font-size: clamp(19px, 5vw, 24px);
+        font-weight: 700;
+        letter-spacing: 0.01em;
+        word-break: break-all;
+        line-height: 1.5;
+      }
+      .btn {
+        appearance: none;
+        border: none;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: 16.5px;
+        font-weight: 700;
+        border-radius: 10px;
+        padding: 13px 24px;
+        line-height: 1.5;
+        text-decoration: none;
+        display: inline-block;
+      }
+      .btn-light { background: var(--accent-ink); color: var(--accent); }
+      @media (prefers-color-scheme: dark) {
+        .btn-light { color: #2b1d0c; }
+      }
+      .btn-outline {
+        background: transparent;
+        color: var(--accent-ink);
+        border: 2px solid currentColor;
+      }
+      .btn:focus-visible, a:focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      .contact-card .btn:focus-visible { outline-color: var(--accent-ink); }
+      .copy-status {
+        font-size: 15px;
+        min-height: 1.6em;
+        margin-top: 10px;
+        opacity: 0.95;
+      }
+
+      /* ---------- Links ---------- */
+      .link-list { display: grid; gap: 14px; margin-top: 22px; }
+      .link-item {
+        display: block;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 20px 24px;
+        text-decoration: none;
+        color: var(--ink);
+      }
+      .link-item:hover { border-color: var(--accent); }
+      .link-item .link-name { font-weight: 700; font-size: 18.5px; display: block; }
+      .link-item .link-desc { color: var(--ink-faint); font-size: 15.5px; display: block; margin-top: 2px; line-height: 1.75; }
+      .link-item .link-arrow { color: var(--accent); font-weight: 700; }
+
+      .notice-box {
+        background: var(--warn-bg);
+        border: 1px solid var(--warn-line);
+        border-radius: var(--radius);
+        color: var(--warn-ink);
+        padding: 22px 26px;
+        margin-top: 22px;
+        font-size: 16.5px;
+        line-height: 1.85;
+      }
+      .notice-box h3 { margin: 0 0 8px; font-size: 18px; color: inherit; }
+      .notice-box ul { margin: 0; padding-left: 1.3em; }
+      .notice-box li { margin-bottom: 4px; }
+      .notice-box li:last-child { margin-bottom: 0; }
+
+      footer {
+        margin-top: 64px;
+        padding-top: 24px;
+        border-top: 1px solid var(--line);
+        color: var(--ink-faint);
+        font-size: 15px;
+        line-height: 1.8;
+      }
+
+      @media (max-width: 560px) {
+        body { font-size: 17.5px; }
+        .card, .free-box { padding: 22px 20px; }
+        .contact-card { padding: 26px 20px; }
+        ol.flow li { padding: 18px 18px 18px 66px; }
+        ol.flow li::before { left: 16px; top: 18px; }
+        .route-topic { min-width: 100%; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <p class="kicker">オンライン（Zoom）の終活相談</p>
+        <h1>終活の相談について</h1>
+        <p class="lead">
+          「何から手をつけたらいいか分からない」「家族に話しにくい」——終活のことで迷ったとき、
+          まず話を聞く相手として、<strong>hiro</strong>がいます。
+          専門家ではありません。自分も病気を経験し、自分の終活を自分で進めてきた一人の人間として、
+          同じ目線でお話を聞きます。
+          むずかしく考えなくて大丈夫です。肩の力を抜いて、まずは下の自動チャットで試しに話してみてください。それでも本人と話したいと思ったら、気軽にメールをください。
+        </p>
+      </header>
+
+      <section aria-labelledby="autochat">
+        <h2 id="autochat">まず、自動チャットで試しに話してみてください</h2>
+        <p>
+          hiroがnoteに書いてきた文章の中から、あなたの言葉に合う一節をそのままお返しする仕組みです。
+          本人ではありませんし、AIが文章を作っているわけでもありません。
+          登録不要・無料で、入力した内容がどこかに送られることもありません（あなたのブラウザの中で検索しています）。
+          ここで気持ちが少し軽くなれば、それで十分です。
+        </p>
+        <style>
+          .hc-chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+          .hc-chip{border:1px solid #e5d9c3;background:#fff;border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer;color:#3a352d}
+          .hc-chip:hover{background:#fdf6ea}
+          .hc-log{display:flex;flex-direction:column;gap:12px;margin:14px 0}
+          .hc-q{align-self:flex-end;background:#f0dcbc;color:#3a352d;border-radius:16px 16px 4px 16px;padding:9px 13px;max-width:85%;font-size:14.5px;white-space:pre-wrap}
+          .hc-a{align-self:flex-start;max-width:94%;font-size:14.5px}
+          .hc-intro{color:#8a8071;font-size:12.5px;margin:0 0 6px}
+          .hc-quote{background:#fff;color:#3a352d;border:1px solid #eee4d2;border-left:4px solid #b06a28;border-radius:10px;padding:11px 13px;margin:0 0 8px;white-space:pre-wrap}
+          .hc-src{display:block;margin-top:7px;font-size:11.5px;color:#8a8071}
+          .hc-src a{color:#b06a28}
+          .hc-form{display:flex;gap:8px;margin-top:6px}
+          .hc-form input{flex:1;border:1px solid #e5d9c3;background:#fff;color:#3a352d;border-radius:12px;padding:11px;font-size:16px;min-width:0}
+          .hc-form button{border:none;background:#b06a28;color:#fff;border-radius:12px;padding:0 18px;font-size:14.5px;cursor:pointer}
+        </style>
+        <div class="hc-chips" id="hc-chips"></div>
+        <div class="hc-log" id="hc-log"></div>
+        <form class="hc-form" id="hc-form">
+          <input id="hc-input" type="text" placeholder="聞きたいことを書いてください" autocomplete="off">
+          <button type="submit">聞く</button>
+        </form>
+        <p style="color:#8a8071;font-size:12.5px;margin-top:14px">
+          それでも本人と話したいと思ったら、下の「相談の流れ」からメールをください。Zoomでお話を聞きます。
+        </p>
+      </section>
+
+      <section aria-labelledby="about">
+        <h2 id="about">相談相手について</h2>
+        <div class="card">
+          <div class="profile-head">
+            <img class="profile-photo" src="data:image/jpeg;base64,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" alt="hiroのプロフィール写真" width="330" height="330" />
+            <div>
+              <p class="profile-name">hiro</p>
+              <p class="profile-sub">アラフィフ男性／胃がんサバイバー</p>
+            </div>
+          </div>
+          <p>
+            アラフィフ男性。胃がんステージ1のサバイバーで、胃の亜全摘の手術を受けました。
+            治療の記録とその後の暮らしを、noteの『胃がん日記』に書き続け、Kindleの本にもしました。正直に言うと、ほとんど売れていません（笑）。それでも、誰かの安心材料になればと思って書いたものです。
+          </p>
+          <p>
+            病気をきっかけに、自分の終活も自分で進めてきました。
+            エンディングノートを書くときの迷いや、家族への伝えにくさは、ひと通り自分で通ってきた道です。
+            その体験から、「まず話を聞いてほしい」という方の相談相手をしています。
+          </p>
+          <p>
+            大きく構えるつもりはありません。お金が目的ではなく、
+            まずは無料で届けて、信用を少しずつ積み重ねていく——それが基本の姿勢です。
+          </p>
+        </div>
+      </section>
+
+      <section aria-labelledby="lines">
+        <h2 id="lines">できること・できないこと</h2>
+        <p class="section-intro">
+          最初に、できないことを正直に書いておきます。
+          ここをはっきりさせておくことが、安心して相談してもらうための約束だと思っています。
+        </p>
+
+        <div class="card">
+          <h3><span class="tag tag-no">やらないこと</span></h3>
+          <ul class="plain no">
+            <li>遺言書の代筆・文案づくり
+              <span class="note">自筆の遺言は、全文を本人が手書きしないと効力を持ちません。善意の代筆が、大事な書類を壊してしまうことがあります。</span>
+            </li>
+            <li>その人ごとの相続税の計算</li>
+            <li>遺産の分け方の案を出すこと</li>
+            <li>保険・金融商品の個別のおすすめや販売</li>
+            <li>各種手続きの代行</li>
+            <li>紹介料をもらっての紹介
+              <span class="note">専門家を紹介するとき、紹介料は一切いただきません。</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3><span class="tag tag-link">専門家につなぐこと</span></h3>
+          <p style="color: var(--ink-soft); font-size: 16.5px; margin-bottom: 10px;">
+            法律・税金・登記などの専門的なことは、私の判断では扱わず、担当の専門家や公的窓口へ橋渡しします。
+          </p>
+          <ul class="route-list">
+            <li><span class="route-topic">遺言のこと</span><span class="route-arrow">→</span><span class="route-to">行政書士・弁護士</span></li>
+            <li><span class="route-topic">相続税のこと</span><span class="route-arrow">→</span><span class="route-to">税理士</span></li>
+            <li><span class="route-topic">相続のもめごと</span><span class="route-arrow">→</span><span class="route-to">弁護士</span></li>
+            <li><span class="route-topic">不動産の名義変更</span><span class="route-arrow">→</span><span class="route-to">司法書士</span></li>
+            <li><span class="route-topic">介護・年金のこと</span><span class="route-arrow">→</span><span class="route-to">地域包括支援センター</span></li>
+          </ul>
+          <p style="color: var(--ink-soft); font-size: 16.5px; margin-top: 12px;">
+            まずはお住まいの自治体の無料相談窓口（弁護士・司法書士・行政書士・税理士）へのご案内もできます。
+            公的な窓口なので、費用の心配なく使えます。
+          </p>
+        </div>
+
+        <h3 class="subhead">全国どこからでも使える、公的な相談先</h3>
+        <p class="section-intro" style="margin-top: 0;">
+          地域を問わず使える公的な窓口です。内容によっては、私を通さず、こちらへ直接相談する方が早いこともあります。
+        </p>
+        <div class="link-list">
+          <a class="link-item" href="https://www.houterasu.or.jp/" target="_blank" rel="noopener">
+            <span class="link-name">法テラス <span class="link-arrow">→</span></span>
+            <span class="link-desc">法律の困りごとの総合案内です。条件によっては、無料の法律相談も受けられます。</span>
+          </a>
+          <a class="link-item" href="https://www.kaigokensaku.mhlw.go.jp/" target="_blank" rel="noopener">
+            <span class="link-name">地域包括支援センターを探す（介護サービス情報公表システム） <span class="link-arrow">→</span></span>
+            <span class="link-desc">介護・福祉の相談窓口「地域包括支援センター」を、お住まいの地域から探せます。</span>
+          </a>
+          <div class="link-item">
+            <span class="link-name">消費者ホットライン「188」</span>
+            <span class="link-desc">契約や勧誘のトラブルは、電話で「188（いやや）」とダイヤルすると、近くの消費生活センターにつながります。</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3><span class="tag tag-yes">私ができること</span></h3>
+          <ul class="plain yes">
+            <li>話を聞くこと、困りごとを整理すること</li>
+            <li>制度についての一般的な説明</li>
+            <li>エンディングノートづくりのお手伝い
+              <span class="note">エンディングノートには法的な効力はありません。大事な部分は遺言に残すよう、あわせてお伝えします。</span>
+            </li>
+            <li>自分の体験（治療、回復、自分の終活）を話すこと</li>
+            <li>専門家・公的窓口への橋渡し</li>
+          </ul>
+        </div>
+      </section>
+
+      <section aria-labelledby="flow">
+        <h2 id="flow">相談の流れ</h2>
+        <ol class="flow">
+          <li>
+            <span class="step-title">自動チャットで試しに話してみる</span>
+            <span class="step-body">このページの上の自動チャットで、hiroの文章からの返事を試してみてください。そこで気持ちが少し軽くなれば、それで十分です。</span>
+          </li>
+          <li>
+            <span class="step-title">それでも本人と話したい方は、メールでご連絡ください</span>
+            <span class="step-body">窓口はメールのみです。困っていること、聞きたいことを、短くても構いませんので書いて送ってください。下のボタンを使うと、書いてほしい項目入りのメール作成画面が開きます。</span>
+            <span class="step-actions"><a class="btn btn-accent" href="mailto:anshin.syukatu@gmail.com?subject=%E7%B5%82%E6%B4%BB%E7%9B%B8%E8%AB%87%E3%81%AE%E4%BB%B6&body=%E3%81%8A%E5%90%8D%E5%89%8D%EF%BC%88%E3%83%8B%E3%83%83%E3%82%AF%E3%83%8D%E3%83%BC%E3%83%A0%E3%81%A7%E3%82%82%E6%A7%8B%E3%81%84%E3%81%BE%E3%81%9B%E3%82%93%EF%BC%89%EF%BC%9A%0A%E3%81%8A%E4%BD%8F%E3%81%BE%E3%81%84%E3%81%AE%E5%9C%B0%E5%9F%9F%EF%BC%88%E5%B8%82%E5%8C%BA%E7%94%BA%E6%9D%91%E3%81%BE%E3%81%A7%E3%81%A7%E5%A4%A7%E4%B8%88%E5%A4%AB%E3%81%A7%E3%81%99%EF%BC%89%EF%BC%9A%0A%E7%9B%B8%E8%AB%87%E3%81%97%E3%81%9F%E3%81%84%E3%81%93%E3%81%A8%EF%BC%9A%0A%E5%B8%8C%E6%9C%9B%E3%81%AE%E6%96%B9%E6%B3%95%EF%BC%88Zoom%EF%BC%8F%E3%81%BE%E3%81%9A%E3%81%AF%E3%83%A1%E3%83%BC%E3%83%AB%E3%81%A0%E3%81%91%EF%BC%89%EF%BC%9A%0A%E5%B8%8C%E6%9C%9B%E3%81%AE%E6%97%A5%E6%99%82%EF%BC%88%E5%9C%9F%E6%97%A5%E3%81%8C%E5%9F%BA%E6%9C%AC%E3%81%A7%E3%81%99%EF%BC%89%EF%BC%9A%0A">雛形入りでメールを書く</a></span>
+          </li>
+          <li>
+            <span class="step-title">返信で日程と方法を調整します</span>
+            <span class="step-body">内容を確認して返信し、Zoomでお話しする日時をご相談して決めます。平日は仕事があるため、対応できるのは基本的に土日です。希望があれば、最初のメールに書いてください。</span>
+          </li>
+          <li>
+            <span class="step-title">Zoomでお話を聞きます</span>
+            <span class="step-body">Zoomなどのオンライン相談のみです。地域は問いませんので、遠方の方もご利用いただけます。オンライン相談は、1回45分までです。カメラはオフのままで大丈夫です（顔出しなしで問題ありません）。</span>
+          </li>
+          <li>
+            <span class="step-title">必要に応じて橋渡しします</span>
+            <span class="step-body">専門的なことが必要な場合は、専門家や公的窓口へつなぎます。</span>
+          </li>
+        </ol>
+
+        <div class="template-box">
+          <h3>メールに書いていただくこと（雛形）</h3>
+          <p class="template-lead">
+            何を書けばいいか迷ったら、この雛形のとおりで大丈夫です。分かる範囲で構いません。
+            コピーして、ご自分のメールに貼って使うこともできます。
+          </p>
+          <p class="template-body" id="mailTemplate">お名前（ニックネームでも構いません）：
+お住まいの地域（市区町村までで大丈夫です）：
+相談したいこと：
+希望の方法（Zoom／まずはメールだけ）：
+希望の日時（土日が基本です）：</p>
+          <div class="mail-row" style="margin-top: 0;">
+            <a class="btn btn-accent" href="mailto:anshin.syukatu@gmail.com?subject=%E7%B5%82%E6%B4%BB%E7%9B%B8%E8%AB%87%E3%81%AE%E4%BB%B6&body=%E3%81%8A%E5%90%8D%E5%89%8D%EF%BC%88%E3%83%8B%E3%83%83%E3%82%AF%E3%83%8D%E3%83%BC%E3%83%A0%E3%81%A7%E3%82%82%E6%A7%8B%E3%81%84%E3%81%BE%E3%81%9B%E3%82%93%EF%BC%89%EF%BC%9A%0A%E3%81%8A%E4%BD%8F%E3%81%BE%E3%81%84%E3%81%AE%E5%9C%B0%E5%9F%9F%EF%BC%88%E5%B8%82%E5%8C%BA%E7%94%BA%E6%9D%91%E3%81%BE%E3%81%A7%E3%81%A7%E5%A4%A7%E4%B8%88%E5%A4%AB%E3%81%A7%E3%81%99%EF%BC%89%EF%BC%9A%0A%E7%9B%B8%E8%AB%87%E3%81%97%E3%81%9F%E3%81%84%E3%81%93%E3%81%A8%EF%BC%9A%0A%E5%B8%8C%E6%9C%9B%E3%81%AE%E6%96%B9%E6%B3%95%EF%BC%88Zoom%EF%BC%8F%E3%81%BE%E3%81%9A%E3%81%AF%E3%83%A1%E3%83%BC%E3%83%AB%E3%81%A0%E3%81%91%EF%BC%89%EF%BC%9A%0A%E5%B8%8C%E6%9C%9B%E3%81%AE%E6%97%A5%E6%99%82%EF%BC%88%E5%9C%9F%E6%97%A5%E3%81%8C%E5%9F%BA%E6%9C%AC%E3%81%A7%E3%81%99%EF%BC%89%EF%BC%9A%0A">雛形入りでメールを書く</a>
+            <button class="btn btn-ghost" type="button" id="copyTemplateBtn">雛形をコピー</button>
+          </div>
+          <p class="copy-note" id="copyTemplateStatus" aria-live="polite"></p>
+        </div>
+      </section>
+
+      <section aria-labelledby="price">
+        <h2 id="price">料金について</h2>
+        <div class="free-box">
+          <h3>相談は、すべて無料です</h3>
+          <p>
+            メールでのご相談も、Zoomでのお話も、何度でも無料です。
+            「こんなこと聞いていいのかな」という段階のものでも構いません。まずはメールをください。
+            なお、仕事をしながらの対応になるため、返信には時間がかかることがあります。
+            対応できるのは基本的に土日で、Zoomなどのオンライン相談は1回45分までです。
+          </p>
+        </div>
+        <div class="paid-box">
+          <p>
+            話して、少しでも安心してもらえたら、それで十分です。
+            もし「ありがとう」の気持ちを形にしたいと思ってくださったら、
+            <a href="https://anshinsyukatu.github.io/survivor-diary/">Kindleの本</a>を買ってくれたり、
+            <a href="https://note.com/hiro_s1220">note</a>でサポートを送ってくれたり、
+            <a href="https://www.youtube.com/@anshin.syukatuhiro">YouTube</a>でスパチャをしてくれたり——
+            そういう形で受け取れたら嬉しいです。
+          </p>
+          <p>
+            もちろん、どれも強制ではありません。読んでもらえるだけ、話してもらえるだけでも十分に嬉しいです。
+          </p>
+        </div>
+      </section>
+
+      <section aria-labelledby="privacy">
+        <h2 id="privacy">個人情報と、大事にしていること</h2>
+        <div class="card">
+          <ul class="plain yes">
+            <li>自宅の住所や個人の電話番号は載せていません。連絡はメールのみです。</li>
+            <li>相談でうかがった内容を、外に出すことはありません。</li>
+            <li>写真の加工はしません。ありのままの姿でお会いします。</li>
+          </ul>
+        </div>
+        <div class="notice-box">
+          <h3>ご承知おきください</h3>
+          <ul>
+            <li>医療・法律・税務についての専門的な判断はしません。必要な場合は、専門家につなぎます。</li>
+            <li>この窓口は、緊急の相談窓口ではありません。お急ぎの困りごとは、まず公的な相談窓口をご利用ください。</li>
+          </ul>
+        </div>
+      </section>
+
+      <section aria-labelledby="contact">
+        <h2 id="contact">連絡先</h2>
+        <div class="contact-card">
+          <h3>終活相談の窓口（メール）</h3>
+          <p>相談はすべて無料です。返信には少しお時間をいただく場合があります。</p>
+          <p>いただいたメールアドレスは、返信のためだけに使います。営業や勧誘に使ったり、第三者に渡したりすることはありません。</p>
+          <div class="mail-row">
+            <span class="mail-address">anshin.syukatu@gmail.com</span>
+          </div>
+          <div class="mail-row">
+            <a class="btn btn-light" href="mailto:anshin.syukatu@gmail.com?subject=%E7%B5%82%E6%B4%BB%E7%9B%B8%E8%AB%87%E3%81%AE%E4%BB%B6&body=%E3%81%8A%E5%90%8D%E5%89%8D%EF%BC%88%E3%83%8B%E3%83%83%E3%82%AF%E3%83%8D%E3%83%BC%E3%83%A0%E3%81%A7%E3%82%82%E6%A7%8B%E3%81%84%E3%81%BE%E3%81%9B%E3%82%93%EF%BC%89%EF%BC%9A%0A%E3%81%8A%E4%BD%8F%E3%81%BE%E3%81%84%E3%81%AE%E5%9C%B0%E5%9F%9F%EF%BC%88%E5%B8%82%E5%8C%BA%E7%94%BA%E6%9D%91%E3%81%BE%E3%81%A7%E3%81%A7%E5%A4%A7%E4%B8%88%E5%A4%AB%E3%81%A7%E3%81%99%EF%BC%89%EF%BC%9A%0A%E7%9B%B8%E8%AB%87%E3%81%97%E3%81%9F%E3%81%84%E3%81%93%E3%81%A8%EF%BC%9A%0A%E5%B8%8C%E6%9C%9B%E3%81%AE%E6%96%B9%E6%B3%95%EF%BC%88Zoom%EF%BC%8F%E3%81%BE%E3%81%9A%E3%81%AF%E3%83%A1%E3%83%BC%E3%83%AB%E3%81%A0%E3%81%91%EF%BC%89%EF%BC%9A%0A%E5%B8%8C%E6%9C%9B%E3%81%AE%E6%97%A5%E6%99%82%EF%BC%88%E5%9C%9F%E6%97%A5%E3%81%8C%E5%9F%BA%E6%9C%AC%E3%81%A7%E3%81%99%EF%BC%89%EF%BC%9A%0A">雛形入りでメールを書く</a>
+            <button class="btn btn-outline" type="button" id="copyBtn">アドレスをコピー</button>
+          </div>
+          <p class="copy-status" id="copyStatus" aria-live="polite"></p>
+        </div>
+      </section>
+
+      <section aria-labelledby="links">
+        <h2 id="links">hiroの発信</h2>
+        <div class="link-list">
+          <a class="link-item" href="https://note.com/hiro_s1220" target="_blank" rel="noopener">
+            <span class="link-name">note「胃がん日記」 <span class="link-arrow">→</span></span>
+            <span class="link-desc">治療の記録と、その後の暮らしを書いているマガジンです。</span>
+          </a>
+          <a class="link-item" href="https://www.youtube.com/@anshin.syukatuhiro" target="_blank" rel="noopener">
+            <span class="link-name">YouTube「hiroの安心終活」 <span class="link-arrow">→</span></span>
+            <span class="link-desc">「胃がん日記」を朗読動画で届けているチャンネルです。</span>
+          </a>
+          <a class="link-item" href="https://anshinsyukatu.github.io/survivor-diary/" target="_blank" rel="noopener">
+            <span class="link-name">本の紹介ページ <span class="link-arrow">→</span></span>
+            <span class="link-desc">Kindle本『胃がん日記』の紹介ページです。これまでの歩みも載っています。</span>
+          </a>
+          <a class="link-item" href="https://anshinsyukatu.github.io/kumaura/" target="_blank" rel="noopener">
+            <span class="link-name">クマうら <span class="link-arrow">→</span></span>
+            <span class="link-desc">hiroが作った、ブラウザでそのまま使える無料の占いサイトです。気分転換にどうぞ。</span>
+          </a>
+        </div>
+      </section>
+
+      <footer>
+        <p>終活の相談窓口：hiro（オンライン（Zoom）のみ・地域は問いません・連絡はメールのみ）</p>
+      </footer>
+    </div>
+
+    <script>
+      (function () {
+        var btn = document.getElementById("copyBtn");
+        var status = document.getElementById("copyStatus");
+        var email = "anshin.syukatu@gmail.com";
+        btn.addEventListener("click", function () {
+          function done(ok) {
+            status.textContent = ok
+              ? "メールアドレスをコピーしました。"
+              : "コピーできませんでした。アドレスを長押ししてコピーしてください。";
+          }
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(email).then(
+              function () { done(true); },
+              function () { fallback(); }
+            );
+          } else {
+            fallback();
+          }
+          function fallback() {
+            var ta = document.createElement("textarea");
+            ta.value = email;
+            ta.style.position = "fixed";
+            ta.style.opacity = "0";
+            document.body.appendChild(ta);
+            ta.select();
+            try {
+              done(document.execCommand("copy"));
+            } catch (e) {
+              done(false);
+            }
+            document.body.removeChild(ta);
+          }
+        });
+      })();
+    </script>
+    <script>
+      (function () {
+        var btn = document.getElementById("copyTemplateBtn");
+        var status = document.getElementById("copyTemplateStatus");
+        var body = document.getElementById("mailTemplate");
+        if (!btn || !body) return;
+        btn.addEventListener("click", function () {
+          var text = body.textContent.replace(/\s+$/, "") + "\n";
+          function done(ok) {
+            status.textContent = ok
+              ? "雛形をコピーしました。メールに貼って使ってください。"
+              : "コピーできませんでした。雛形の文字を選んでコピーしてください。";
+          }
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(
+              function () { done(true); },
+              function () { fallback(); }
+            );
+          } else {
+            fallback();
+          }
+          function fallback() {
+            var ta = document.createElement("textarea");
+            ta.value = text;
+            ta.style.position = "fixed";
+            ta.style.opacity = "0";
+            document.body.appendChild(ta);
+            ta.select();
+            try {
+              done(document.execCommand("copy"));
+            } catch (e) {
+              done(false);
+            }
+            document.body.removeChild(ta);
+          }
+        });
+      })();
+    </script>
+  
+<script>
+(function(){
+  var STARTERS = ['終活って何から始めましたか？','家族にはどう伝えましたか？','手術は怖かったですか？','治療費はどれくらいかかりましたか？','再発が怖いです','今の気持ちは？'];
+  var DOCS = [], IDF = {};
+  var FUNC = ['について','でしょうか','ましたか','ですか','ますか','ください','ほしい','どう','どれくらい','どのくらい','いつ','何を','して','いる','ある','なる','こと','もの','ため','よう','は','が','を','に','の','へ','と','や','も','か','ね','よ','で','す','し','た','て'];
+  function cleanQuery(q){
+    var t = (q||'').replace(/[\s。、・「」『』（）()!?！？:：;；,.\"'〜~]/g,'');
+    for(var i=0;i<FUNC.length;i++) t = t.split(FUNC[i]).join('');
+    return t;
+  }
+  function bigrams(x){
+    var t = (x||'').replace(/[\s。、・「」『』（）()!?！？:：;；,.\"'〜~\-ー]/g,'').toLowerCase();
+    var out = [];
+    for(var i=0;i<t.length-1;i++) out.push(t.slice(i,i+2));
+    return out;
+  }
+  function esc(x){ return x.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function addQ(q){
+    var log = document.getElementById('hc-log');
+    var div = document.createElement('div');
+    div.className = 'hc-q'; div.textContent = q;
+    log.appendChild(div);
+  }
+  function addA(hits, intro){
+    var log = document.getElementById('hc-log');
+    var div = document.createElement('div');
+    div.className = 'hc-a';
+    if(!hits.length){
+      div.innerHTML = '<p class="hc-intro">すみません</p><div class="hc-quote">そのことは、まだ文章に書いていないみたいです。別の言い方で聞いてもらうか、<a href="https://note.com/hiro_s1220" target="_blank" rel="noopener">note</a>をのぞいてみてください。本人に聞きたい場合は、下の「相談の流れ」からメールをどうぞ。</div>';
+    } else {
+      var html = '<p class="hc-intro">' + esc(intro || 'そのことについては、こんなふうに書いています。') + '</p>';
+      for(var i=0;i<hits.length;i++){
+        html += '<div class="hc-quote">' + esc(hits[i].text) + '<span class="hc-src">出典：<a href="' + hits[i].url + '" target="_blank" rel="noopener">' + esc(hits[i].title) + '</a></span></div>';
+      }
+      div.innerHTML = html;
+    }
+    log.appendChild(div);
+  }
+  function score(qb, d){
+    var sc = 0;
+    for(var i=0;i<qb.length;i++){
+      var b = qb[i], w = IDF[b];
+      if(!w) continue;
+      var c = 0, idx = d.text.indexOf(b);
+      while(idx !== -1){ c++; idx = d.text.indexOf(b, idx+1); if(c>=2) break; }
+      sc += w * c;
+      if(d.title.indexOf(b) !== -1) sc += w * 1.5;
+    }
+    return sc / (0.6 + Math.sqrt(d.text.length/120));
+  }
+  function search(q){
+    var seen = {}, qb = [];
+    var raw = bigrams(cleanQuery(q));
+    for(var i=0;i<raw.length;i++){ if(!seen[raw[i]]){ seen[raw[i]]=1; qb.push(raw[i]); } }
+    if(!qb.length) return [];
+    var scored = [];
+    for(var j=0;j<DOCS.length;j++){ var sc = score(qb, DOCS[j]); if(sc>0) scored.push({d:DOCS[j], s:sc}); }
+    scored.sort(function(a,b){ return b.s - a.s; });
+    if(!scored.length || scored[0].s < 1.2) return [];
+    var top = scored[0].s, picked = [], used = {};
+    for(var k=0;k<scored.length;k++){
+      if(picked.length>=2) break;
+      if(scored[k].s < top*0.5) break;
+      if(used[scored[k].d.title] && picked.length) continue;
+      used[scored[k].d.title] = 1;
+      picked.push(scored[k].d);
+    }
+    return picked;
+  }
+  function ask(q){
+    q = (q||'').trim();
+    if(!q) return;
+    addQ(q);
+    addA(search(q));
+    document.getElementById('hc-input').value = '';
+  }
+  var chips = document.getElementById('hc-chips');
+  STARTERS.forEach(function(q){
+    var el = document.createElement('button');
+    el.className = 'hc-chip'; el.type = 'button'; el.textContent = q;
+    el.onclick = function(){ ask(q); };
+    chips.appendChild(el);
+  });
+  document.getElementById('hc-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    ask(document.getElementById('hc-input').value);
+  });
+  fetch('https://anshinsyukatu.github.io/works/corpus.json')
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      var df = {};
+      data.articles.forEach(function(a){
+        a.passages.forEach(function(p){ DOCS.push({title:a.title, url:a.url, text:p}); });
+      });
+      DOCS.forEach(function(d){
+        var seen = {}, bg = bigrams(d.title + d.text);
+        bg.forEach(function(b){ if(!seen[b]){ seen[b]=1; df[b]=(df[b]||0)+1; } });
+      });
+      var N = DOCS.length;
+      for(var b in df) IDF[b] = Math.log(1 + N/(1+df[b]));
+      addA([{text:'こんにちは。ここでは、hiroが書いてきた文章の中から、あなたの言葉に合う一節をお返しします。上のボタンから選ぶか、下の欄に自由に書いてみてください。', title:'ごあいさつ', url:'https://note.com/hiro_s1220'}], '最初に');
+    })
+    .catch(function(){
+      addA([], '');
+    });
+})();
+</script>
+</body>
+</html>
